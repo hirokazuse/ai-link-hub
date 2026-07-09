@@ -1,0 +1,363 @@
+{
+  "agents": [
+    {
+      "id": "claude-fable-5",
+      "name": "Claude Fable 5",
+      "interface": "cli / web",
+      "category": "Reasoning / Flagship Agent",
+      "url": "https://www.anthropic.com",
+      "billing": {
+        "type": "Subscription (Max/Team) + Pay-as-you-go",
+        "base_plan": "Max ($100-$200/mo) / Team Premium ($125/mo)",
+        "api_cost_per_1m_tokens": { "input": 15.00, "output": 75.00 },
+        "min_deposit_usd": 5.00,
+        "note": "最上位のフラグシップ推論モデル。Claude CodeやAiderで自律ループを回すと数分で数ドル〜数十ドルを消費するため、定額Max枠での運用か、最終手段のデバッグ時のみ推奨。"
+      },
+      "strengths": ["数時間に及ぶ長期の広範囲自律開発", "超複雑なリポジトリ全体のロジック解析", "SWE-bench Verified最高峰のバグ修正率"],
+      "efficiency_by_task": {
+        "complex_development": "最高。他のモデルが諦めるような未踏の難解バグや、大規模リファクタリングを一発で解き明かします。",
+        "simple_data_processing": "最悪。1パスで終わる単純作業に使うのはコスト・速度ともに完全にドブに捨てる行為です。"
+      }
+    },
+    {
+      "id": "claude-sonnet-5",
+      "name": "Claude Sonnet 5",
+      "interface": "cli / web",
+      "category": "CLI Default / Balanced Agent",
+      "url": "https://www.anthropic.com",
+      "billing": {
+        "type": "Subscription + Pay-as-you-go",
+        "base_plan": "Pro ($20/mo) / Max ($100/mo)",
+        "api_cost_per_1m_tokens": { "input": 3.00, "output": 15.00 },
+        "min_deposit_usd": 5.00,
+        "note": "Claude Codeのデフォルトモデル。Proプランの定額枠を消費して動かすのが個人開発での最も現実的な運用。"
+      },
+      "strengths": ["速度とインテリジェンスのベストバランス", "ブラウザ・ターミナルを跨ぐ自律プランニング", "Git/CI/CDとの高速連携修正"],
+      "efficiency_by_task": {
+        "complex_development": "非常に高い。日常的な機能実装、バグハント、テストコードの作成などをテンポよく完遂可能。",
+        "simple_data_processing": "悪い。これでもエージェント経由で自動再送ループが発生するとトークンを浪費するため、単純なパース等には過剰スペック。"
+      }
+    },
+    {
+      "id": "claude-opus-4-8",
+      "name": "Claude Opus 4.8",
+      "interface": "cli / api",
+      "category": "Deep Reasoning / Architecture",
+      "url": "https://www.anthropic.com",
+      "billing": {
+        "type": "Pay-as-you-go / Pro Tier (Beta)",
+        "base_plan": "API完全従量課金",
+        "api_cost_per_1m_tokens": { "input": 15.00, "output": 75.00 },
+        "min_deposit_usd": 5.00,
+        "note": "Adaptive Thinking（適応型思考）による深層解析モデル。API単価が高いため、設計書のレビューやピンポイントの難所攻略向き。"
+      },
+      "strengths": ["複数ファイルにまたがる厳密な仕様整合性の維持", "アルゴリズムや数学的ロジックの設計・検証", "人間の意図の超高精度な汲み取り"],
+      "efficiency_by_task": {
+        "complex_development": "高い。ただし速度が遅く単価が高いため、CLIで自動ループさせるよりは、1パスでじっくり構造を考えさせるタスク向け。",
+        "simple_data_processing": "最悪。膨大なテキストを処理させると一瞬で数ドルが溶けます。"
+      }
+    },
+    {
+      "id": "claude-haiku-4-5",
+      "name": "Claude Haiku 4.5",
+      "interface": "cli / api",
+      "category": "CLI / Fast Utility",
+      "url": "https://www.anthropic.com",
+      "billing": {
+        "type": "Pay-as-you-go",
+        "base_plan": "API完全従量課金",
+        "api_cost_per_1m_tokens": { "input": 0.25, "output": 1.25 },
+        "min_deposit_usd": 0.00,
+        "note": "旧世代Sonnetより安く爆速。Aider等のバックエンドに指定して1パス（非エージェント）で動かす分には非常に安価。"
+      },
+      "strengths": ["圧倒的な低レイテンシ（即時返答）", "ボイラープレート（定型コード）の高速生成", "厳密なタグ付け・テキスト分類"],
+      "efficiency_by_task": {
+        "complex_development": "低い。リポジトリ全体を探索して勝手にバグを直すような複雑な自律ループを回す知能はありません。",
+        "simple_data_processing": "極めて高い。大量の生データ整形、ログファイルのパース、スクレイピング後の不要文字列削除などを安価かつ一瞬で終わらせたい時に最適。"
+      }
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT (Web/App)",
+      "interface": "chat",
+      "category": "General Chat / Reasoning",
+      "url": "https://chatgpt.com",
+      "billing": {
+        "type": "Free / Subscription ($20/mo)",
+        "base_plan": "Plus ($20/mo) / Pro ($200/mo)",
+        "api_cost_per_1m_tokens": { "input": 15.00, "output": 60.00 },
+        "min_deposit_usd": 5.00,
+        "note": "主要推論モデル基準（mini系は入力 $0.15 / 出力 $0.60）。"
+      },
+      "strengths": ["直感的なUIでの対話", "o4などの強力な推論モデルの利用", "高度な文章生成と対話"],
+      "efficiency_by_task": {
+        "complex_development": "高い。最新の推論モデルをバックエンドに選べるため、複雑なエラー解析で高い突破力を持つ。",
+        "simple_data_processing": "普通。mini系モデルに切り替えて1パスで処理させるならコスト効率が良い。"
+      }
+    },
+    {
+      "id": "groq",
+      "name": "Groq",
+      "interface": "web",
+      "category": "Infra / API",
+      "url": "https://groq.com",
+      "billing": {
+        "type": "Pay-as-you-go / Free Tier",
+        "base_plan": "Free Tierあり (従量課金はDeveloper/Production)",
+        "api_cost_per_1m_tokens": { "input": 0.59, "output": 0.79 },
+        "min_deposit_usd": 0.00,
+        "note": "Llama 3 70B基準の参考値。無料枠の範囲内であればクレジットカード登録なしで運用可能。"
+      },
+      "strengths": ["圧倒的なトークン生成速度", "低レイテンシ即時コード補完", "大量一括処理タスク"],
+      "efficiency_by_task": {
+        "complex_development": "普通。高速レスポンスで試行錯誤は爆速だが、モデル自体の最大推論能力は特化型に劣る。",
+        "simple_data_processing": "極めて高い。1パスで終わる大量のデータ整形やスクレイピング情報のパースにおいて最高クラス。"
+      }
+    },
+    {
+      "id": "claude-ai",
+      "name": "Claude.ai (Web)",
+      "interface": "chat",
+      "category": "General Chat / Artifacts",
+      "url": "https://claude.ai",
+      "billing": {
+        "type": "Free / Pro ($20/mo)",
+        "base_plan": "Pro ($20/mo)",
+        "api_cost_per_1m_tokens": { "input": 3.00, "output": 15.00 },
+        "min_deposit_usd": 5.00,
+        "note": "WebUI上での利用枠。API連携とは別枠扱い。"
+      },
+      "strengths": ["Artifacts機能によるコード・WebUIの即時プレビュー", "長文コンテキストの正確な理解"],
+      "efficiency_by_task": {
+        "complex_development": "高い。単一画面のプロトタイプ作成や、Artifactsを活用したコード生成が非常にスムーズ。",
+        "simple_data_processing": "普通。画面上へのテキストやファイルのドロップによる一括処理が可能。"
+      }
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini (Web/Advanced)",
+      "interface": "chat",
+      "category": "General Chat / Google Workspace Integration",
+      "url": "https://gemini.google.com",
+      "billing": {
+        "type": "Free / Subscription ($20/mo)",
+        "base_plan": "Gemini Advanced ($20/mo)",
+        "api_cost_per_1m_tokens": { "input": 0.075, "output": 0.30 },
+        "note": "API単価はGemini 3.5 Flashを基準。100万〜200万トークンという他社を圧倒する超巨大なコンテキスト窓（記憶容量）が特徴。"
+      },
+      "strengths": [
+        "Google検索と連動したリアルタイムで正確なウェブ情報へのアクセス",
+        "Gmail、Googleドライブ、マップ等の各種Googleサービス（拡張機能）との強固な直接連携",
+        "数冊分の本や膨大なソースコード、長時間の動画を丸ごと一度に読み込める広大なコンテキスト窓"
+      ],
+      "efficiency_by_task": {
+        "complex_development": "高い。大規模なリポジトリの全コードを一度にコンテキストに叩き込んで全体像を解析させるタスクで無類の強さを発揮。",
+        "simple_data_processing": "極めて高い。Flash系モデルをAPI経由で回す場合のコストパフォーマンスは業界最安値クラス。"
+      }
+    },
+    {
+      "id": "llm-cli",
+      "name": "LLM CLI",
+      "interface": "cli",
+      "category": "CLI / Utility",
+      "url": "https://github.com/simonw/llm",
+      "billing": {
+        "type": "Pay-as-you-go / Free (Depending on API)",
+        "base_plan": "プラグイン形式で各社API・無料枠を利用可能",
+        "api_cost_per_1m_tokens": { "input": 0.15, "output": 0.60 },
+        "min_deposit_usd": 0.00,
+        "note": "OpenAI mini系やGroq、Gemini等のAPIキーを登録して利用。1パス完結のため、エージェント特有の自動再送による過剰課金リスクがゼロ。"
+      },
+      "strengths": ["1回投げて1回結果を得る「1パス処理」に完全特化", "パイプライン処理（cat data.txt | llm ...）が容易", "多様なプラグインによるモデル一元管理"],
+      "efficiency_by_task": {
+        "complex_development": "普通。エージェントのような自動修正機能はないため、対話的な開発には不向き。",
+        "simple_data_processing": "極めて高い。テキストやTSV/CSVの一括整形、キーワード抽出などの定型処理を最安コストで安全に回せます。"
+      }
+    },
+    {
+      "id": "aider-mini",
+      "name": "Aider (Mini Mode)",
+      "interface": "cli",
+      "category": "CLI / Code Assistant",
+      "url": "https://aider.chat",
+      "billing": {
+        "type": "Pay-as-you-go",
+        "base_plan": "API経由での利用 (o4-mini / GPT-4o mini等を指定)",
+        "api_cost_per_1m_tokens": { "input": 0.15, "output": 0.60 },
+        "min_deposit_usd": 0.00,
+        "note": "Prompt Cachingに対応しているため、連続した処理要求では入力トークン代が最大90%オフになります。"
+      },
+      "strengths": ["安価なMini系推論モデルへのバックエンド切り替え", "プロンプトキャッシュによる入力コストの超圧縮", "Gitへの自動コミット連携"],
+      "efficiency_by_task": {
+        "complex_development": "高い。モデルを安価なものに固定しても、Aider自体のファイル管理能力が高いためバランス良く機能します。",
+        "simple_data_processing": "高い。連続して似たようなデータパースを回す際、キャッシュの恩恵でコストを極限まで抑えられます。"
+      }
+    },
+    {
+      "id": "ollama",
+      "name": "Ollama",
+      "interface": "cli",
+      "category": "CLI / Local LLM",
+      "url": "https://ollama.com",
+      "billing": {
+        "type": "Completely Free",
+        "base_plan": "完全無料（ローカル実行）",
+        "api_cost_per_1m_tokens": { "input": 0.00, "output": 0.00 },
+        "min_deposit_usd": 0.00,
+        "note": "自身のPC（Apple Silicon等）のローカルリソースを消費。外部へのデータ送信やAPI課金は一切発生しません。"
+      },
+      "strengths": ["完全無料（$0.00）かつ無制限 of ローカル運用", "外部に漏洩したくないデータの秘匿処理", "Llama3やQwenなど軽量高速な最新オープンモデルの即時利用"],
+      "efficiency_by_task": {
+        "complex_development": "普通。PCスペックに依存するため、巨大な商用モデルに比べると複雑なコード解析力は一歩劣る。",
+        "simple_data_processing": "極めて高い。スクレイピングした生データから不要タグを削る、特定項目で分類するといった単純なバルク処理を無限に回すのに最適。"
+      }
+    },
+    {
+      "id": "opencode",
+      "name": "OpenCode",
+      "interface": "cli",
+      "category": "CLI / Agent",
+      "url": "https://github.com/opencode-ai/opencode",
+      "billing": {
+        "type": "Pay-as-you-go / Free (Depending on Backend)",
+        "base_plan": "オープンソース（無料）。API利用時はOpenRouter、DeepSeek、各社API、またはローカルLLMの従量課金",
+        "api_cost_per_1m_tokens": { "input": 0.14, "output": 0.28 },
+        "min_deposit_usd": 0.00,
+        "note": "DeepSeekやOpenRouterの格安API、またはローカルのOllama等を繋ぐことで、Claude Codeライクな自律修正ループを圧倒的低コストで運用可能。"
+      },
+      "strengths": ["Claude Codeの操作感や自律タスク実行能力をOSSで再現", "ベンダーロックインがなくバックエンドLLMを自由に変更・選択可能", "格安APIやローカルLLMとの組み合わせによる抜群のコストパフォーマンス"],
+      "efficiency_by_task": {
+        "complex_development": "高い。DeepSeek-R1や最新のReasoningモデルを裏側に指定すれば、複雑なバグハントやリファクタリングも実用レベルでこなします。",
+        "simple_data_processing": "高い。安価なmini系やローカルLLMに切り替えてタスクを投げられるため、自律ループを回してもお財布へのダメージが極めて少ない。"
+      }
+    },
+    {
+      "id": "deepseek",
+      "name": "DeepSeek (V3/R1)",
+      "interface": "web",
+      "category": "Reasoning / Infra / API",
+      "url": "https://www.deepseek.com",
+      "billing": {
+        "type": "Pay-as-you-go",
+        "base_plan": "API経由での利用（または公式Web無料枠）",
+        "api_cost_per_1m_tokens": { "input": 0.14, "output": 0.28 },
+        "min_deposit_usd": 0.00,
+        "note": "キャッシュヒット時は入力が4分の1（約$0.035）になる驚異的な格安単価。R1（推論）の思考中トークンも出力単価と同額で計算。"
+      },
+      "strengths": [
+        "商用トップモデル（Sonnet等）に肉薄するコード生成・デバッグ能力",
+        "o1/o4クラスの強力な思考プロセス（Reasoning）による複雑なロジック解析",
+        "他社のMini系クラスを圧倒する業界破壊レベルの低価格API"
+      ],
+      "efficiency_by_task": {
+        "complex_development": "極めて高い。R1モデルをAiderやOpenCodeのバックエンドに指定することで、複雑な開発タスクを数分の一のコストで突破可能。",
+        "simple_data_processing": "極めて高い。V3モデル（通常モデル）の爆速かつ格安な特性を活かし、大量のスクレイピングデータやJSONの整形を最安値で安全にこなせます。"
+      }
+    },
+    {
+      "id": "bigpickle",
+      "name": "BigPickle (via OpenCode)",
+      "interface": "cli",
+      "category": "CLI / Stealth Model",
+      "url": "https://opencode.ai",
+      "billing": {
+        "type": "Free (Limited Time)",
+        "base_plan": "OpenCode経由で期間限定無料提供",
+        "api_cost_per_1m_tokens": { "input": 0.00, "output": 0.00 },
+        "min_deposit_usd": 0.00,
+        "note": "OpenCode / OpenCode Zenのデフォルトルーティングとして提供されるプロバイダ非公開のステルスモデル。無料期間中は学習データとして使用される可能性があるため注意が必要。"
+      },
+      "strengths": [
+        "期間限定で大規模なコンテキスト窓をもつコーディングモデルを完全無料で利用可能",
+        "OpenCode CLIのエージェント機能と密接に統合されており、レスポンスが高速",
+        "課金を気にせずにリポジトリ全体の探索やファーストパス（初期設計）の作成を回せる"
+      ],
+      "efficiency_by_task": {
+        "complex_development": "普通。無料期間中の低リスクなプロトタイプ作成や、大規模リポジトリのコード検索・俯瞰には極めて有用だが、機密コードや本番運用のロジック解析には不向き。",
+        "simple_data_processing": "極めて高い。エージェントが自律ループを何度回してもトークン消費コストが一切かからないため、大量ファイルのドキュメント化や低リスクなテキスト整形を回すのに最適。"
+      }
+    },
+    {
+      "id": "hy3-free",
+      "name": "Hy3 (free)",
+      "interface": "cli",
+      "category": "CLI / Reasoning / Agent",
+      "url": "https://github.com/tencent/Hy3",
+      "billing": {
+        "type": "Free (Promotion)",
+        "base_plan": "OpenRouter / OpenCode等経由で無料枠提供",
+        "api_cost_per_1m_tokens": { "input": 0.00, "output": 0.00 },
+        "min_deposit_usd": 0.00,
+        "note": "Tencentが開発した295Bの巨大MoEモデル（アクティブ21B）。OpenRouterや各CLIツールとの連携プロモーションにより、期間限定で入力・出力ともに完全無料で提供中。"
+      },
+      "strengths": [
+        "SWE-bench Verified等で最高峰のスコアを叩き出す強力なコーディング＆エージェント適性",
+        "思考プロセス（Reasoning）の強度をタスクの複雑さに応じて3段階（無・低・高）に調整可能",
+        "256Kの大容量コンテキスト窓を活かした複数ファイルにまたがる広範囲バグハント"
+      ],
+      "efficiency_by_task": {
+        "complex_development": "極めて高い。現状無料枠で回せるモデルとしては最上位クラスのエージェント性能を持ち、ツール連携（Tool Call）の安定性も高くタスクを完遂しやすい。",
+        "simple_data_processing": "極めて高い。どれだけ長いリポジトリやログデータを流し込んで自律修正ループを回しても、無料提供期間中であればコストが完全にゼロで収まるため抜群のコスパ。"
+      }
+    },
+    {
+      "id": "hy3-free",
+      "name": "Hy3 (free)",
+      "interface": "cli",
+      "category": "CLI / Reasoning / Agent",
+      "url": "https://github.com/tencent/Hy3",
+      "billing": {
+        "type": "Free (Promotion)",
+        "base_plan": "OpenRouter / OpenCode等経由で無料枠提供",
+        "api_cost_per_1m_tokens": { "input": 0.00, "output": 0.00 },
+        "min_deposit_usd": 0.00,
+        "note": "Tencentが開発した295Bの巨大MoEモデル（アクティブ21B）。OpenRouterや各CLIツールとの連携プロモーションにより、期間限定で入力・出力ともに完全無料で提供中。"
+      },
+      "strengths": [
+        "SWE-bench Verified等で最高峰のスコアを叩き出す強力なコーディング＆エージェント適性",
+        "思考プロセス（Reasoning）の強度をタスクの複雑さに応じて3段階（無・低・高）に調整可能",
+        "256Kの大容量コンテキスト窓を活かした複数ファイルにまたがる広範囲バグハント"
+      ],
+      "efficiency_by_task": {
+        "complex_development": "極めて高い。現状無料枠で回せるモデルとしては最上位クラスのエージェント性能を持ち、ツール連携（Tool Call）の安定性も高くタスクを完遂しやすい。",
+        "simple_data_processing": "極めて高い。どれだけ長いリポジトリやログデータを流し込んで自律修正ループを回しても、無料提供期間中であればコストが完全にゼロで収まるため抜群のコスパ。"
+      }
+    },
+    {
+      "id": "nemotron-3-ultra-free",
+      "name": "Nemotron 3 Ultra (free)",
+      "interface": "cli",
+      "category": "CLI / Chat / Coding",
+      "url": "https://build.nvidia.com",
+      "billing": {
+        "type": "Free (Promotion)",
+        "base_plan": "OpenRouter / OpenCode経由で期間限定無料提供",
+        "api_cost_per_1m_tokens": { "input": 0.00, "output": 0.00 },
+        "min_deposit_usd": 0.00,
+        "note": "NVIDIAが誇る超高速・高スループットな分散推論最適化を体感するためのプロモーション無料枠。他の重量級モデルに比べて1秒あたりのトークン生成数（TPS）が圧倒的に速い。"
+      },
+      "strengths": [
+        "圧倒的なトークン生成速度と低レイテンシにより、CLIエージェントの思考やログ出力が一切淀まない",
+        "NVIDIAによるチューニングが施され、構造化データ（JSON/YAML/TSV等）のパースや厳密な指示への追従性が高い",
+        "無料でありながら実用的なコンテキスト長を持ち、サクサクとターンを回すインタラクティブなデバッグに向く"
+      ],
+      "efficiency_by_task": {
+        "complex_development": "普通。ディープな推論（Reasoning）を重ねるバグハントよりは、既存の明確な設計書に基づいたコードの肉付けや、ボイラープレート（定型コード）の大量生成といった「スピードと手数を要求される実装」で真価を発揮します。",
+        "simple_data_processing": "極めて高い。データのクレンジング、ログファイルからのパターン抽出、大量のコードコメント生成など、直列で大量のトークンを高速処理させたいデータパイプライン系のタスクにおいて、ストレスもコストもゼロで運用可能です。"
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ]
+}
