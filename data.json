@@ -345,19 +345,67 @@
         "complex_development": "普通。ディープな推論（Reasoning）を重ねるバグハントよりは、既存の明確な設計書に基づいたコードの肉付けや、ボイラープレート（定型コード）の大量生成といった「スピードと手数を要求される実装」で真価を発揮します。",
         "simple_data_processing": "極めて高い。データのクレンジング、ログファイルからのパターン抽出、大量のコードコメント生成など、直列で大量のトークンを高速処理させたいデータパイプライン系のタスクにおいて、ストレスもコストもゼロで運用可能です。"
       }
+    },
+    {
+      "id": "gemini-3-0-ultra",
+      "name": "Gemini 3.0 Ultra",
+      "interface": "web / api",
+      "category": "Reasoning / Flagship Agent",
+      "url": "https://gemini.google.com",
+      "billing": {
+        "type": "Subscription / Pay-as-you-go",
+        "base_plan": "Gemini Advanced ($20/mo) / Google One AI Premium",
+        "api_cost_per_1m_tokens": { "input": 2.00, "output": 8.00 },
+        "min_deposit_usd": 0.00,
+        "note": "Googleの最高峰推論モデル。WebUI（Advanced契約）では定額で利用可能。思考プロセス（Reasoning）を備え、複雑なコードのバグハントやアーキテクチャ設計で高い突破力を持つ。"
+      },
+      "strengths": ["高度な推論とマルチステップのコード修正", "GmailやGoogleドライブ等のWorkspace dataとの強固な直接連携", "数万行のソースコードを一度に飲み込む正確な文脈理解"],
+      "efficiency_by_task": {
+        "complex_development": "最高。複雑なエラー解析や、複数モジュールにまたがるリファクタリングにおいて、定額料金の範囲内で粘り強く思考させることができます。",
+        "simple_data_processing": "普通。知能が高いため処理は正確ですが、一方向の大量パースに使うには少々贅沢なモデルです。"
+      }
+    },
+    {
+      "id": "gemini-3-5-flash",
+      "name": "Gemini 3.5 Flash",
+      "interface": "web / api",
+      "category": "Fast Utility / Large Context",
+      "url": "https://aistudio.google.com",
+      "billing": {
+        "type": "Free Tier / Pay-as-you-go",
+        "base_plan": "AI Studio経由で無料枠あり（従量課金も業界最安値クラス）",
+        "api_cost_per_1m_tokens": { "input": 0.075, "output": 0.30 },
+        "min_deposit_usd": 0.00,
+        "note": "200万トークンという他社を圧倒する超巨大なコンテキスト窓が最大の特徴。API経由で大のファイルを一括処理させる際のコストパフォーマンスは唯一無二。"
+      },
+      "strengths": ["200万トークンの広大な記憶容量（本数十冊分、大規模リポジトリ丸ごと）", "圧倒的な低レイテンシと高速なスループット", "Google検索と連動した最新のリアルタイムウェブ情報へのアクセス"],
+      "efficiency_by_task": {
+        "complex_development": "高い。大規模リポジトリの全コードを1パスでコンテキストに叩き込み、全体像を瞬時に解析・俯瞰させるタスクで無類の強さを発揮します。",
+        "simple_data_processing": "極めて高い。Flash系モデルをAPIやスクリプト経由で回す場合、大量のスクレイピングデータやTSVの整形・クンジングにおいて、業界最高峰のコスト効率を誇ります。"
+      }
+    },
+    {
+      "id": "antigravity-cli",
+      "name": "Antigravity CLI (agy)",
+      "interface": "cli",
+      "category": "CLI / Agent Platform",
+      "url": "https://cloud.google.com",
+      "billing": {
+        "type": "Pay-as-you-go / Google Cloud Billing",
+        "base_plan": "Google Cloudのプロジェクトに紐づく従量課金（モデルに応じたAPI単価）",
+        "api_cost_per_1m_tokens": { "input": 0.075, "output": 0.30 },
+        "min_deposit_usd": 0.00,
+        "note": "バックエンドにGemini Flash系を指定して回す場合、入力 $0.075 / 出力 $0.30 基準。Google Cloudの堅牢な認証（gcloud auth）と連動し、セキュアなインフラ操作が可能。"
+      },
+      "strengths": [
+        "Google Cloud（GCP）リソースや、ローカルファイルとシームレスに連携したエージェント実行能力",
+        "シンプルな1パスのタスク要求から、複雑な複数ステップのワークフロー自動化までをターミナルで完結",
+        "Google Workspaceや各種クラウドデータベース、APIへの安全なアクセスとトークン認証の自動ハンドリング"
+      ],
+      "efficiency_by_task": {
+        "complex_development": "高い。インフラの自動構築や、クラウド上のデータパイプラインを操作する自律エージェントとして極めて強力に機能します。",
+        "simple_data_processing": "極めて高い。`agy` を経由して軽量かつ広大なコンテキストを持つFlash系モデルをバッチ処理でぶん回せるため、大量のデータ整形やスクレイピング情報の流し込みにおいて最高峰のコスパを誇ります。"
+      }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
   ]
 }
