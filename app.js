@@ -1,25 +1,58 @@
+let allAgents = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. JSONデータをローカル環境から取得
     fetch('data.json')
         .then(response => response.json())
         .then(data => {
-            // 2. 「chat」ツールが最上位にくるようにデータを並び替える
-            const sortedAgents = sortAgentsByInterface(data.agents);
+            allAgents = data.agents;
+            // 2. 初期表示：「chat」ツールが最上位にくるようにデータを並び替える
+            const sortedAgents = sortAgentsByInterface(allAgents, 'chat');
             // 3. 並び替えたデータをHTML画面に描画する
             renderLinks(sortedAgents);
+            // 4. 並び替えボタンのセットアップ
+            setupSortButtons();
         })
         .catch(error => console.error('データの読み込みに失敗しました:', error));
 });
 
 /**
  * インターフェース属性に基づいてツールを並び替える関数
- * 「chat」を最優先にし、それ以外（cli, web等）は後方に配置します
+ * 指定された「priority」を最優先にし、それ以外は後方に配置します
  */
-function sortAgentsByInterface(agents) {
-    return agents.sort((a, b) => {
-        if (a.interface === 'chat' && b.interface !== 'chat') return -1;
-        if (b.interface === 'chat' && a.interface !== 'chat') return 1;
-        return 0; // 同一タイプ、またはchat以外の組み合わせは順序維持
+function sortAgentsByInterface(agents, priority) {
+    return [...agents].sort((a, b) => {
+        const aHasPriority = a.interface && a.interface.includes(priority);
+        const bHasPriority = b.interface && b.interface.includes(priority);
+
+        if (aHasPriority && !bHasPriority) return -1;
+        if (!aHasPriority && bHasPriority) return 1;
+        return 0; // 同一タイプ、または優先度以外の組み合わせは順序維持
+    });
+}
+
+/**
+ * 並び替えボタンにイベントリスナーを登録する関数
+ */
+function setupSortButtons() {
+    const buttons = document.querySelectorAll('.sort-controls button');
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const type = button.getAttribute('data-type');
+
+            // アクティブなボタンのスタイルを切り替え
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // データを並び替えて再描画
+            const sorted = sortAgentsByInterface(allAgents, type);
+            renderLinks(sorted);
+        });
+
+        // 初期状態で「chat」ボタンをアクティブにする
+        if (button.getAttribute('data-type') === 'chat') {
+            button.classList.add('active');
+        }
     });
 }
 

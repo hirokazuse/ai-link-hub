@@ -14,13 +14,25 @@
         .url-link:hover { text-decoration: underline; }
         ul { padding-left: 20px; margin-top: 5px; }
         li { margin-bottom: 4px; font-size: 14px; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .sort-controls { display: flex; gap: 10px; }
+        .sort-controls button { padding: 6px 12px; border: 1px solid #0071e3; border-radius: 4px; background: white; color: #0071e3; cursor: pointer; font-weight: bold; font-size: 14px; transition: all 0.2s; }
+        .sort-controls button:hover, .sort-controls button.active { background: #0071e3; color: white; }
     </style>
 </head>
 <body>
 
     <h1>AI Link Hub</h1>
-    <div class="menu" style="margin-bottom: 20px;">
-        <a href="generator.html" style="color: #0071e3; text-decoration: none; font-weight: bold;">[+] JSON 生成・追記用フォーム</a>
+    <div class="header-container">
+        <div class="menu">
+            <a href="generator.html" style="color: #0071e3; text-decoration: none; font-weight: bold;">[+] JSON 生成・追記用フォーム</a>
+        </div>
+        <div class="sort-controls">
+            <button data-type="chat">chat</button>
+            <button data-type="cli">cli</button>
+            <button data-type="api">api</button>
+            <button data-type="web">web</button>
+        </div>
     </div>
     <div id="agent-list"><!-- JSでここにカードが挿入される --></div>
 
