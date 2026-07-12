@@ -6,7 +6,8 @@
     <title>AI Link Hub</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f4f5f7; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { border-bottom: 2px solid #ddd; padding-bottom: 10px; font-size: 24px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ddd; padding-bottom: 10px; margin-bottom: 16px; }
+        h1 { font-size: 24px; margin: 0; }
         .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .badge { background: #e1e4e8; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
@@ -14,15 +15,63 @@
         .url-link:hover { text-decoration: underline; }
         ul { padding-left: 20px; margin-top: 5px; }
         li { margin-bottom: 4px; font-size: 14px; }
+
+        /* フィルタードロップダウン */
+        .header-controls { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        #filter-select { padding: 5px 10px; border: 1.5px solid #ccc; border-radius: 6px; background: #fff; color: #555; font-size: 13px; font-weight: 600; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; padding-right: 26px; transition: border-color 0.15s; }
+        #filter-select:focus { outline: none; border-color: #0366d6; }
+
+        /* 言語切り替えボタン */
+        #lang-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border: 1.5px solid #0071e3;
+            border-radius: 6px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        #lang-toggle button {
+            padding: 5px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            background: white;
+            color: #0071e3;
+            transition: background 0.15s, color 0.15s;
+        }
+        #lang-toggle button.active {
+            background: #0071e3;
+            color: white;
+        }
+        #lang-toggle button:not(:last-child) {
+            border-right: 1.5px solid #0071e3;
+        }
     </style>
 </head>
 <body>
 
-    <h1>AI Link Hub</h1>
-    <div class="menu" style="margin-bottom: 20px;">
-        <a href="generator.html" style="color: #0071e3; text-decoration: none; font-weight: bold;">[+] JSON 生成・追記用フォーム</a>
+    <div class="page-header">
+        <h1>AI Link Hub</h1>
+        <div class="header-controls">
+            <select id="filter-select">
+                <option value="all">すべて</option>
+                <option value="chat">chat</option>
+                <option value="cli">cli</option>
+                <option value="api">api</option>
+                <option value="web">web</option>
+            </select>
+            <div id="lang-toggle">
+                <button id="btn-ja" class="active" onclick="setLang('ja')">日本語</button>
+                <button id="btn-en" onclick="setLang('en')">English</button>
+            </div>
+        </div>
     </div>
     <div id="agent-list"><!-- JSでここにカードが挿入される --></div>
+    <footer style="margin-top: 32px; text-align: right; font-size: 12px;">
+        <a href="admin.html" style="color: #aaa; text-decoration: none;">⚙ 管理画面</a>
+    </footer>
 
     <script src="app.js"></script>
 </body>
