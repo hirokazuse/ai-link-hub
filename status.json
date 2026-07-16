@@ -1,0 +1,16 @@
+{
+  "status": "planning",
+  "progress": 20,
+  "progressNote": "",
+  "description": "静的Webアプリ(index.html / app.js / data.json)",
+  "issues": {
+    "open": 2,
+    "closed": 0
+  },
+  "prs": {
+    "open": 2,
+    "merged": 0
+  },
+  "lastUpdated": "2026-07-15",
+  "notes": ""
+}
